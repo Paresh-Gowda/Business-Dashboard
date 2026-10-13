@@ -480,34 +480,32 @@ function applyFilters() {
         region: document.getElementById('regionFilter').value,
         category: document.getElementById('categoryFilter').value,
         segment: document.getElementById('segmentFilter').value,
-        payment: document.getElementById('paymentFilter').value
+        payment: document.getElementById('paymentFilter').value,
+        salesChannel: document.getElementById('salesChannelFilter').value
     };
     const active = Object.values(vals).filter(v => v !== 'all').length;
     const note = document.getElementById('filterNote');
-    note.innerHTML = `<span class="note-pulse"></span> ${active ? `${active} filter${active > 1 ? 's' : ''} selected` : 'Showing all available sales data'} <span class="preview-note">Preview filters update the view labels; connect your dataset for live recalculation</span>`;
+    note.innerHTML = `<span class="note-pulse"></span> ${active ? `${active} filter${active > 1 ? 's' : ''} selected` : 'Showing all available sales data'} <span class="preview-note">Preview filters update the view labels; Export Dataset downloads the linked workbook</span>`;
     // These are intentionally demo figures: filters show interaction state but do not pretend to recalculate unavailable row-level data.
     document.querySelector('.date-chip b').textContent = vals.year === 'all' ? '2024 — 2026' : vals.year;
     document.querySelector('.panel-foot b').innerHTML = (vals.region === 'all' ? 'North' : vals.region) + ' <i>·</i> ' + (vals.region === 'all' ? '₹60M' : 'Region selected');
-    showToast(active ? 'Filters selected — connect sales data for live metric updates.' : 'All filters reset.');
+    showToast(active ? 'Filters selected.' : 'All filters reset.');
 }
-function exportSummary() {
-    const lines = ['Cognitive Capital — Sales Intelligence Summary', '', `Total Revenue: ₹${base.revenue.toFixed(2)}M`, `Total Profit: ₹${base.profit.toFixed(2)}M`, `Total Orders: ${numberFormat(base.orders)}+`, `Profit Margin: ${(base.profit / base.revenue * 100).toFixed(2)}%`, `Unique Customers: ${numberFormat(base.customers)}`, '', 'Note: Dashboard preview values and chart series are illustrative. Connect the cleaned dataset before using for reporting.'];
-    const blob = new Blob([lines.join('\n')],{
-        type: 'text/plain;charset=utf-8'
-    });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'cognitive-capital-sales-summary.txt';
-    a.click();
-    URL.revokeObjectURL(url);
-    showToast('Summary exported.');
+function exportDataset() {
+    // Export the actual Google Sheets workbook as an Excel file.
+    // This intentionally does not create or download a text summary.
+    const spreadsheetId = '1tX4cgYGdHkThe3BF4KBJf5sIQhXy496g';
+    const exportUrl = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/export?format=xlsx`;
+
+    showToast('Opening the dataset download…');
+    window.location.assign(exportUrl);
 }
+
 document.addEventListener('DOMContentLoaded', () => {
     initCharts();
-    ['yearFilter', 'regionFilter', 'categoryFilter', 'segmentFilter', 'paymentFilter'].forEach(id => document.getElementById(id).addEventListener('change', applyFilters));
+    ['yearFilter', 'regionFilter', 'categoryFilter', 'segmentFilter', 'paymentFilter', 'salesChannelFilter'].forEach(id => document.getElementById(id).addEventListener('change', applyFilters));
     document.getElementById('resetFilters').addEventListener('click', () => {
-        ['yearFilter', 'regionFilter', 'categoryFilter', 'segmentFilter', 'paymentFilter'].forEach(id => document.getElementById(id).value = 'all');
+        ['yearFilter', 'regionFilter', 'categoryFilter', 'segmentFilter', 'paymentFilter', 'salesChannelFilter'].forEach(id => document.getElementById(id).value = 'all');
         applyFilters()
     }
     );
@@ -517,7 +515,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast(document.body.classList.contains('light-mode') ? 'Light theme enabled.' : 'Dark theme enabled.')
     }
     );
-    document.getElementById('exportBtn').addEventListener('click', exportSummary);
+    document.getElementById('exportBtn').addEventListener('click', exportDataset);
     document.querySelectorAll('.nav-item').forEach(item => item.addEventListener('click', () => {
         document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
         item.classList.add('active')
