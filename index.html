@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#080d1b" />
+    <title>Cognitive Capital | Sales Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#overview" aria-label="Cognitive Capital home">
+          <span class="brand-mark">
+            <svg viewBox="0 0 40 40" aria-hidden="true">
+              <path d="M7 27 15 11l6 12 5-8 7 12" />
+              <path d="M7 32h26" />
+              <circle cx="15" cy="11" r="2" />
+              <circle cx="26" cy="15" r="2" />
+            </svg>
+          </span>
+          <span>
+            <b> Cognitive<span>Capital</span> </b>
+            <small>SALES INTELLIGENCE</small>
+          </span>
+        </a>
+        <div class="side-label">WORKSPACE</div>
+        <nav class="nav-list">
+          <a class="nav-item active" href="#overview">
+            <span class="nav-icon">◫</span>
+            Overview <span class="nav-dot"></span>
+          </a>
+          <a class="nav-item" href="#revenue">
+            <span class="nav-icon">⌁</span>
+            Revenue analytics
+          </a>
+          <a class="nav-item" href="#products">
+            <span class="nav-icon">▦</span>
+            Product insights
+          </a>
+          <a class="nav-item" href="#customers">
+            <span class="nav-icon">◎</span>
+            Customer segments
+          </a>
+          <a class="nav-item" href="#returns">
+            <span class="nav-icon">↗</span>
+            Returns & risk
+          </a>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="status-card">
+            <span class="status-light"></span>
+            <div>
+              <b>Dashboard ready</b>
+              <small>Interactive preview</small>
+            </div>
+          </div>
+          <div class="profile">
+            <div class="avatar">CC</div>
+            <div>
+              <b>Analytics workspace</b>
+              <small>Sales & Business</small>
+            </div>
+            <span class="profile-menu">•••</span>
+          </div>
+        </div>
+      </aside>
+      <main class="main-content" id="overview">
+        <header class="topbar">
+          <div class="breadcrumbs">
+            <span>Workspace</span>
+            <span class="crumb-slash">/</span>
+            <b>Sales overview</b>
+          </div>
+          <div class="top-actions">
+            <span class="updated">
+              <i></i>
+              Dashboard preview
+            </span>
+            <button
+              class="icon-button"
+              id="themeToggle"
+              aria-label="Toggle light theme"
+              title="Toggle theme"
+            >
+              ◐
+            </button>
+            <button class="export-button" id="exportBtn">
+              <span>↓</span>
+              Export dataset
+            </button>
+          </div>
+        </header>
+        <section class="page-heading">
+          <div>
+            <div class="eyebrow">
+              <span class="eyebrow-line"></span>
+              BUSINESS PERFORMANCE
+            </div>
+            <h1>Sales <span>Overview</span></h1>
+            <p>
+              Understand performance, discover patterns, and make smarter
+              decisions.
+            </p>
+          </div>
+          <div class="heading-right">
+            <div class="date-chip">
+              <span class="calendar-icon">▦</span>
+              <span>
+                <small>REPORTING PERIOD</small>
+                <b>2024 — 2026</b>
+              </span>
+              <span class="chevron">⌄</span>
+            </div>
+          </div>
+        </section>
+        <section class="filter-bar glass-panel" aria-label="Dashboard filters">
+          <div class="filter-heading">
+            <span class="filter-symbol">☷</span>
+            <span>
+              <b>Filters</b>
+              <small>Refine your view</small>
+            </span>
+          </div>
+          <label class="filter-control">
+            <span>Year</span>
+            <select id="yearFilter">
+              <option value="all">All years</option>
+              <option>2024</option>
+              <option>2025</option>
+              <option>2026</option>
+            </select>
+          </label>
+          <label class="filter-control">
+            <span>Region</span>
+            <select id="regionFilter">
+              <option value="all">All regions</option>
+              <option>North</option>
+              <option>West</option>
+              <option>East</option>
+              <option>South</option>
+            </select>
+          </label>
+          <label class="filter-control">
+            <span>Category</span>
+            <select id="categoryFilter">
+              <option value="all">All categories</option>
+              <option>Electronics</option>
+              <option>Home & Kitchen</option>
+              <option>Sports</option>
+              <option>Fashion</option>
+              <option>Beauty</option>
+              <option>Books</option>
+            </select>
+          </label>
+          <label class="filter-control">
+            <span>Customer segment</span>
+            <select id="segmentFilter">
+              <option value="all">All segments</option>
+              <option>Consumer</option>
+              <option>Corporate</option>
+              <option>Small Business</option>
+            </select>
+          </label>
+          <label class="filter-control">
+            <span>Payment method</span>
+            <select id="paymentFilter">
+              <option value="all">All methods</option>
+              <option>Cash</option>
+              <option>Net Banking</option>
+              <option>Card</option>
+              <option>UPI</option>
+            </select>
+          </label>
+          <label class="filter-control">
+            <span>Sales channel</span>
+            <select id="salesChannelFilter">
+              <option value="all">All channels</option>
+              <option>In-Store</option>
+              <option>Mobile App</option>
+              <option>Online</option>
+            </select>
+          </label>
+          <button
+            class="reset-button"
+            id="resetFilters"
+            title="Reset all filters"
+          >
+            ↺
+          </button>
+        </section>
+        <div class="filter-note" id="filterNote">
+          <span class="note-pulse"></span>
+          Showing all available sales data
+          <span class="preview-note"
+            >Preview interface · export the linked dataset</span
+          >
+        </div>
+        <section class="kpi-grid" aria-label="Key performance indicators">
+          <article class="kpi-card accent-cyan">
+            <div class="kpi-top">
+              <span class="kpi-label">TOTAL REVENUE</span>
+              <span class="kpi-icon">₹</span>
+            </div>
+            <div class="kpi-value" data-value="revenue">
+              ₹218.26<span>M</span>
+            </div>
+            <div class="kpi-bottom">
+              <span class="kpi-caption">Net sales generated</span>
+              <span class="sparkline cyan">▁▂▃▂▄▅▄▆</span>
+            </div>
+            <div class="kpi-glow"></div>
+          </article>
+          <article class="kpi-card accent-violet">
+            <div class="kpi-top">
+              <span class="kpi-label">TOTAL PROFIT</span>
+              <span class="kpi-icon">↗</span>
+            </div>
+            <div class="kpi-value" data-value="profit">
+              ₹49.25<span>M</span>
+            </div>
+            <div class="kpi-bottom">
+              <span class="kpi-caption">Profit earned</span>
+              <span class="sparkline violet">▂▃▂▄▃▅▆▅</span>
+            </div>
+            <div class="kpi-glow"></div>
+          </article>
+          <article class="kpi-card accent-blue">
+            <div class="kpi-top">
+              <span class="kpi-label">TOTAL ORDERS</span>
+              <span class="kpi-icon">▤</span>
+            </div>
+            <div class="kpi-value" data-value="orders">5,000<span>+</span></div>
+            <div class="kpi-bottom">
+              <span class="kpi-caption">Distinct order IDs</span>
+              <span class="sparkline blue">▂▂▄▃▅▄▆▇</span>
+            </div>
+            <div class="kpi-glow"></div>
+          </article>
+          <article class="kpi-card accent-pink">
+            <div class="kpi-top">
+              <span class="kpi-label">PROFIT MARGIN</span>
+              <span class="kpi-icon">％</span>
+            </div>
+            <div class="kpi-value" data-value="margin">22.56<span>%</span></div>
+            <div class="kpi-bottom">
+              <span class="kpi-caption">Profit / net sales</span>
+              <span class="sparkline pink">▃▄▃▅▄▆▅▆</span>
+            </div>
+            <div class="kpi-glow"></div>
+          </article>
+          <article class="kpi-card accent-green">
+            <div class="kpi-top">
+              <span class="kpi-label">UNIQUE CUSTOMERS</span>
+              <span class="kpi-icon">◎</span>
+            </div>
+            <div class="kpi-value" data-value="customers">1,001</div>
+            <div class="kpi-bottom">
+              <span class="kpi-caption">Distinct customers</span>
+              <span class="sparkline green">▂▃▃▄▅▄▆▇</span>
+            </div>
+            <div class="kpi-glow"></div>
+          </article>
+        </section>
+        <section class="charts-grid">
+          <article class="panel chart-panel trend-panel" id="revenue">
+            <div class="panel-header">
+              <div>
+                <div class="panel-kicker">REVENUE PERFORMANCE</div>
+                <h2>Monthly revenue trend</h2>
+                <p>Revenue alongside the sales target</p>
+              </div>
+              <button class="more-button" aria-label="More chart options">
+                •••
+              </button>
+            </div>
+            <div class="chart-legend">
+              <span>
+                <i class="legend-dot cyan-dot"></i>
+                Net revenue
+              </span>
+              <span>
+                <i class="legend-dot violet-dot"></i>
+                Sales target
+              </span>
+            </div>
+            <div class="chart-area trend-chart">
+              <canvas
+                id="trendChart"
+                aria-label="Monthly revenue trend chart"
+              ></canvas>
+            </div>
+          </article>
+          <article class="panel chart-panel region-panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-kicker">GEOGRAPHIC MIX</div>
+                <h2>Revenue by region</h2>
+                <p>Regional sales contribution</p>
+              </div>
+              <span class="panel-icon">⌖</span>
+            </div>
+            <div class="chart-area region-chart">
+              <canvas
+                id="regionChart"
+                aria-label="Revenue by region chart"
+              ></canvas>
+            </div>
+            <div class="panel-foot">
+              <span>Highest contribution</span>
+              <b>
+                North <i>·</i>
+                ₹60M
+              </b>
+            </div>
+          </article>
+          <article class="panel chart-panel target-panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-kicker">PLAN VS ACTUAL</div>
+                <h2>Revenue vs sales target</h2>
+                <p>Annual comparison</p>
+              </div>
+              <button class="more-button" aria-label="More chart options">
+                •••
+              </button>
+            </div>
+            <div class="chart-area target-chart">
+              <canvas
+                id="targetChart"
+                aria-label="Revenue and target chart"
+              ></canvas>
+            </div>
+          </article>
+          <article class="panel chart-panel category-panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-kicker">PRODUCT MIX</div>
+                <h2>Revenue by category</h2>
+                <p>Share of total net revenue</p>
+              </div>
+              <button class="more-button" aria-label="More chart options">
+                •••
+              </button>
+            </div>
+            <div class="category-content">
+              <div class="donut-wrap">
+                <canvas
+                  id="categoryChart"
+                  aria-label="Revenue by category doughnut chart"
+                ></canvas>
+                <div class="donut-center">
+                  <b>₹218.3M</b>
+                  <span>Total revenue</span>
+                </div>
+              </div>
+              <div class="category-legend" id="categoryLegend"></div>
+            </div>
+          </article>
+          <article class="panel chart-panel products-panel" id="products">
+            <div class="panel-header">
+              <div>
+                <div class="panel-kicker">PRODUCT LEADERS</div>
+                <h2>Top 5 products by revenue</h2>
+                <p>Highest-performing products</p>
+              </div>
+              <span class="panel-icon">↗</span>
+            </div>
+            <div class="chart-area products-chart">
+              <canvas
+                id="productsChart"
+                aria-label="Top products by revenue chart"
+              ></canvas>
+            </div>
+          </article>
+          <article class="panel chart-panel margin-panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-kicker">PROFITABILITY</div>
+                <h2>Margin vs discount</h2>
+                <p>Product-level relationship</p>
+              </div>
+              <span class="panel-icon">⌁</span>
+            </div>
+            <div class="chart-area scatter-chart">
+              <canvas
+                id="scatterChart"
+                aria-label="Profit margin versus discount scatter chart"
+              ></canvas>
+            </div>
+            <div class="insight-strip">
+              <span class="insight-icon">✦</span>
+              <span>
+                <b>Insight to investigate</b>
+                <small
+                  >Review high-discount products with weaker margins.</small
+                >
+              </span>
+            </div>
+          </article>
+          <article class="panel chart-panel segment-panel" id="customers">
+            <div class="panel-header">
+              <div>
+                <div class="panel-kicker">CUSTOMER MIX</div>
+                <h2>Orders by segment</h2>
+                <p>Order distribution</p>
+              </div>
+              <span class="panel-icon">◎</span>
+            </div>
+            <div class="segment-content">
+              <div class="segment-donut">
+                <canvas
+                  id="segmentChart"
+                  aria-label="Orders by customer segment chart"
+                ></canvas>
+                <div class="donut-center">
+                  <b>5K</b>
+                  <span>Orders</span>
+                </div>
+              </div>
+              <div class="segment-legend" id="segmentLegend"></div>
+            </div>
+          </article>
+          <article class="panel chart-panel returns-panel" id="returns">
+            <div class="panel-header">
+              <div>
+                <div class="panel-kicker">RETURNS & RISK</div>
+                <h2>Return cost by category</h2>
+                <p>Refund exposure across categories</p>
+              </div>
+              <span class="panel-icon">↗</span>
+            </div>
+            <div class="chart-area returns-chart">
+              <canvas
+                id="returnsChart"
+                aria-label="Return cost by category chart"
+              ></canvas>
+            </div>
+            <div class="panel-foot">
+              <span>Largest return-cost category</span>
+              <b>Electronics</b>
+            </div>
+          </article>
+        </section>
+        <footer class="footer">
+          <span>
+            <span class="footer-mark">✦</span>
+            Cognitive Capital <span class="footer-divider">/</span>
+            Sales Intelligence
+          </span>
+          <span>Designed for clarity. Built for decisions.</span>
+        </footer>
+      </main>
+    </div>
+    <div class="toast" id="toast" role="status"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
